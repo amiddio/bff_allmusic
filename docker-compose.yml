@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  web-app-bff:
+    build:
+      context: ./src_bff
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src_bff/src:/app
+    networks:
+      - web-app-bff-network
+
+networks:
+  web-app-bff-network:
