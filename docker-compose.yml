@@ -11,6 +11,55 @@ services:
       - ./src_bff/src:/app
     networks:
       - web-app-bff-network
+  
+  web-app-all-music:
+    build:
+      context: ./src_allmusic
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./src_allmusic/src:/app
+    networks:
+      - web-app-all-music-network
+    depends_on:
+      - db-all-music
+    links:
+      - db-all-music
+  
+  db-all-music:
+    image: postgres:14.6-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: allmusic_db
+      POSTGRES_USER: allmusic_user
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_allmusic_db:/var/lib/postgresql/data
+    networks:
+      - web-app-all-music-network
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@home.com
+      PGADMIN_DEFAULT_PASSWORD: Qwerty12345
+    ports:
+      - "5050:80"
+    depends_on:
+      - db-all-music
+    links:
+      - db-all-music
+    volumes:
+      - pgadmin_allmusic_db_data:/var/lib/pgadmin
+    networks:
+      - web-app-all-music-network
 
 networks:
   web-app-bff-network:
+  web-app-all-music-network:
+
+volumes:
+  pgdata_allmusic_db:
+  pgadmin_allmusic_db_data:
