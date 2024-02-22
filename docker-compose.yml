@@ -27,6 +27,20 @@ services:
     links:
       - db-allmusic
   
+  web-app-users:
+    build:
+      context: ./src_users
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db-users
+    links:
+      - db-users
+    volumes:
+      - ./src_users/src:/app
+    networks:
+      - web-app-users-network
+  
   db-allmusic:
     image: postgres:14.6-alpine
     restart: always
@@ -40,6 +54,20 @@ services:
       - pgdata_allmusic_db:/var/lib/postgresql/data
     networks:
       - web-app-allmusic-network
+    
+  db-users:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: 12345
+      MONGO_INITDB_DATABASE: users_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata_users_db:/data/db
+    networks:
+      - web-app-users-network
   
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -60,7 +88,9 @@ services:
 networks:
   web-app-bff-network:
   web-app-allmusic-network:
+  web-app-users-network:
 
 volumes:
   pgdata_allmusic_db:
   pgadmin_allmusic_db_data:
+  mongodata_users_db:
