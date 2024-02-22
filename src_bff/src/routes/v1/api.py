@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from .endpoints.testing import router as testing_router
+from .endpoints.allmusic import router as allmusic_router
 
 router = APIRouter()
 
-router.include_router(testing_router)
+router.include_router(allmusic_router)

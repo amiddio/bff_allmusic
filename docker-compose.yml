@@ -11,8 +11,9 @@ services:
       - ./src_bff/src:/app
     networks:
       - web-app-bff-network
+      - web-app-allmusic-network
   
-  web-app-all-music:
+  web-app-allmusic:
     build:
       context: ./src_allmusic
     ports:
@@ -20,13 +21,13 @@ services:
     volumes:
       - ./src_allmusic/src:/app
     networks:
-      - web-app-all-music-network
+      - web-app-allmusic-network
     depends_on:
-      - db-all-music
+      - db-allmusic
     links:
-      - db-all-music
+      - db-allmusic
   
-  db-all-music:
+  db-allmusic:
     image: postgres:14.6-alpine
     restart: always
     environment:
@@ -38,7 +39,7 @@ services:
     volumes:
       - pgdata_allmusic_db:/var/lib/postgresql/data
     networks:
-      - web-app-all-music-network
+      - web-app-allmusic-network
   
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -48,17 +49,17 @@ services:
     ports:
       - "5050:80"
     depends_on:
-      - db-all-music
+      - db-allmusic
     links:
-      - db-all-music
+      - db-allmusic
     volumes:
       - pgadmin_allmusic_db_data:/var/lib/pgadmin
     networks:
-      - web-app-all-music-network
+      - web-app-allmusic-network
 
 networks:
   web-app-bff-network:
-  web-app-all-music-network:
+  web-app-allmusic-network:
 
 volumes:
   pgdata_allmusic_db:
