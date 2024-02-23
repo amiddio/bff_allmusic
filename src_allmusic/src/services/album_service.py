@@ -83,6 +83,22 @@ class AlbumService(BaseService):
             tracks=TrackService(db=self._db).split_by_disc(tracks=album.tracks)
         )
 
+    async def get_artist_id(self, album_id: int) -> int:
+        """
+        Возвращает artist id от переданого album id
+
+        :param album_id: int
+        :return: int
+        """
+
+        album = self._db.query(self._model.artist_id).where(self._model.id == album_id).first()
+        if not album:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Album with supplied ID does not exist"
+            )
+
+        return album[0]
+
     def create_or_update(self, album: Album) -> int:
         """
         Создается или обновляется альбом в БД

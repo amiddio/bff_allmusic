@@ -29,3 +29,8 @@ async def get_albums(artist_id: int, release_type_id: int, db: Session = Depends
 @router.get('/album/{album_id}', response_description="Get album detail", response_model=AlbumDisplay)
 async def get_album_detail(album_id: int, db: Session = Depends(get_db)) -> AlbumDisplay:
     return await AlbumService(db=db).get_album(album_id=album_id)
+
+
+@router.get('/artist_id/{album_id}', response_description="Get artist_id by album_id")
+async def get_artist_id(album_id: int, db: Session = Depends(get_db)) -> int:
+    return await AlbumService(db=db).get_artist_id(album_id=album_id)
