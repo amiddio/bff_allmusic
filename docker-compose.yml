@@ -12,6 +12,7 @@ services:
     networks:
       - web-app-bff-network
       - web-app-allmusic-network
+      - web-app-users-network
   
   web-app-allmusic:
     build:

@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Security
 
 from services.allmusic_service import AllmusicService
+from utils.permission import Permission
 
 router = APIRouter(prefix='/allmusic')
 
@@ -11,17 +12,17 @@ async def get_all_artists(request: Request) -> dict:
 
 
 @router.get('/artist/{artist_id}', response_description="Get artist detail by id")
-async def get_artist_detail(artist_id: int) -> dict:
+async def get_artist_detail(artist_id: int, _=Security(Permission())) -> dict:
     return await AllmusicService().get_artist_by_id(artist_id=artist_id)
 
 
 @router.get('/discography/{artist_id}/{release_type_id}', response_description="Get albums")
-async def get_artist_albums(artist_id: int, release_type_id: int) -> dict:
+async def get_artist_albums(artist_id: int, release_type_id: int, _=Security(Permission())) -> dict:
     return await AllmusicService().get_artist_albums(artist_id=artist_id, release_type_id=release_type_id)
 
 
 @router.get('/album/{album_id}', response_description="Get album detail")
-async def get_album_detail(album_id: int) -> dict:
+async def get_album_detail(album_id: int, _=Security(Permission())) -> dict:
     return await AllmusicService().get_album_by_id(album_id=album_id)
 
 

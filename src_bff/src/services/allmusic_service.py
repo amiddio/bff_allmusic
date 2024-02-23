@@ -35,9 +35,16 @@ class AllmusicService(BaseService):
                 url=self.__class__.APP_ALLMUSIC_DOMAIN + f'/view/album/{album_id}'
             )
 
+    async def get_artist_id(self, album_id: int) -> dict:
+        async with ClientSession() as session:
+            return await self.__class__.get(
+                session=session,
+                url=self.__class__.APP_ALLMUSIC_DOMAIN + f'/view/artist_id/{album_id}'
+            )
+
     async def do_parsing(self, artists: dict):
         async with ClientSession() as session:
-            return await self.__class__.post(
+            return await self.__class__.post_json(
                 session=session,
                 url=self.__class__.APP_ALLMUSIC_DOMAIN + '/parser',
                 data=artists

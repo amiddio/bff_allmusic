@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     API_URI_PREFIX: str
 
     WEB_APP_ALLMUSIC_DOMAIN: str
+    WEB_APP_USERS_DOMAIN: str
 
     class Config:
         env_file = '.env'

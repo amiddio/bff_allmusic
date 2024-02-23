@@ -7,6 +7,7 @@ from models.user import UserRegister, UserOut
 from services.user import UserService
 from utils.auth_jwt import AuthJWT
 from utils.authenticate import Authenticate
+from utils.permission import Permission
 
 router = APIRouter(prefix='/users')
 
@@ -57,3 +58,8 @@ async def login_user(form_data: OAuth2PasswordRequestForm = Depends()) -> Token:
 @router.get("/me", response_description="Get user data", response_model=UserOut, status_code=status.HTTP_200_OK)
 async def get_user(user: UserOut = Security(Authenticate())) -> UserOut:
     return user
+
+
+@router.get("/is_permission/{artist_id}", response_description="Is permission?", status_code=status.HTTP_200_OK)
+async def is_permission(artist_id: int, permission: bool = Depends(Permission())) -> bool:
+    return True
