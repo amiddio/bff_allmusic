@@ -26,8 +26,8 @@ class ArtistService(BaseService):
         query = self._db.query(self._model)
 
         paginated_query = query.order_by(self._model.name) \
-                               .offset((page_params.page - 1) * page_params.size) \
-                               .limit(page_params.size).all()
+            .offset((page_params.page - 1) * page_params.size) \
+            .limit(page_params.size).all()
 
         return PagedResponseSchema(
             total=query.count(),
@@ -58,6 +58,17 @@ class ArtistService(BaseService):
                 ReleaseTypeDetail(release_type_id=item.id, type=item.type, name=item.name) for item in release_types
             ],
         )
+
+    async def is_artists(self, artist_ids: list[int]) -> list[int]:
+        """
+        Возвращает список artist_id которые есть в БД
+
+        :param artist_ids: list[int]
+        :return: list[int]
+        """
+
+        ids = self._db.query(self._model.id).where(self._model.id.in_(artist_ids)).all()
+        return list(map(lambda x: int(x[0]), ids))
 
     def create_or_update(self, artist: Artist) -> int:
         """
