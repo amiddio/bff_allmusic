@@ -38,3 +38,11 @@ class UserService(BaseService):
                 headers=headers
             )
 
+    async def subscribe_user(self, data: dict, headers: Headers) -> dict:
+        header_authorization = {'Authorization': headers.get('Authorization')}
+        async with ClientSession(headers=header_authorization) as session:
+            return await self.post_json(
+                session=session,
+                url=self.APP_USERS_DOMAIN + '/subscribe',
+                data=data
+            )

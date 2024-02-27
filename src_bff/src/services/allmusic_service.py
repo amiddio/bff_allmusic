@@ -21,6 +21,15 @@ class AllmusicService(BaseService):
                 url=self.__class__.APP_ALLMUSIC_DOMAIN + f'/view/artist/{artist_id}'
             )
 
+    async def is_artists_exist(self, artist_ids: dict) -> list[int | None]:
+        async with ClientSession() as session:
+            resp_artist_ids = await self.__class__.post_json(
+                session=session,
+                url=self.__class__.APP_ALLMUSIC_DOMAIN + f'/view/is_artists',
+                data=artist_ids
+            )
+            return list(set(artist_ids.get('artist_ids')).difference(resp_artist_ids))
+
     async def get_artist_albums(self, artist_id: int, release_type_id: int) -> dict:
         async with ClientSession() as session:
             return await self.__class__.get(
