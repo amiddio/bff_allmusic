@@ -2,6 +2,7 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from models.settings import Settings
+from models.subscriber import Subscriber
 from models.user import UserRegister, User
 
 
@@ -30,7 +31,7 @@ async def connect_to_mongodb():
     await init_beanie(
         database=db.client.get_database(settings.MONGODB_DB),
         document_models=[
-            User, UserRegister
+            User, UserRegister, Subscriber
         ]
     )
 

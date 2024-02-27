@@ -11,13 +11,13 @@ class Crud:
         await model.create()
 
     @staticmethod
-    async def find(model: Any, criteria: dict = None) -> list[Any]:
+    async def find(model: Any, criteria: Any = None) -> list[Any]:
         if criteria is None:
             criteria = {}
         return await model.find(criteria).to_list()
 
     @staticmethod
-    async def find_one(model: Any, criteria: dict = None) -> Any:
+    async def find_one(model: Any, criteria: Any = None) -> Any:
         if criteria is None:
             criteria = {}
         return await model.find_one(criteria)
