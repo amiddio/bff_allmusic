@@ -1,7 +1,9 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file='.env')
+
     API_URI_PREFIX: str
 
     DB_TYPE: str
@@ -12,6 +14,3 @@ class Settings(BaseSettings):
 
     PGADMIN_EMAIL: str
     PGADMIN_PASSW: str
-
-    class Config:
-        env_file = '.env'
