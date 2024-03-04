@@ -5,7 +5,6 @@ import pytest_asyncio
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from databases.mongodb import connect_to_mongodb, close_mongodb_connection
 from main import app
 from models.settings import Settings
 from models.subscriber import Subscriber
@@ -13,14 +12,6 @@ from models.user import User, UserRegister
 
 settings = Settings()
 
-
-# @pytest_asyncio.fixture(scope="session")
-# def event_loop():
-#     """Overrides pytest default function scoped event loop"""
-#     policy = asyncio.get_event_loop_policy()
-#     loop = policy.new_event_loop()
-#     yield loop
-#     loop.close()
 
 @pytest_asyncio.fixture(scope="session")
 async def db() -> None:

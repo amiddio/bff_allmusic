@@ -13,10 +13,6 @@ class DataBase:
 db = DataBase()
 
 
-# async def get_database() -> AsyncIOMotorClient:
-#     return db.client
-
-
 async def connect_to_mongodb():
     settings = Settings()
 

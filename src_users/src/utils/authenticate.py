@@ -1,17 +1,28 @@
 from datetime import datetime
-
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from starlette import status
 
+from models.user import User
 from services.user import UserService
 from utils.auth_jwt import AuthJWT
 
 
 class Authenticate:
+    """
+    Класс проверки валидности токена
+    """
+
     oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login", scheme_name="JWT")
 
-    async def __call__(self, token: str = Depends(oauth2_scheme)):
+    async def __call__(self, token: str = Depends(oauth2_scheme)) -> User:
+        """
+        Возвращает пользователя или генерируется исключение если токен не валидный
+
+        :param token: str
+        :return: User
+        """
+
         if not token:
             await self.__raise_exception(msg="Sign in for access", status_code=status.HTTP_403_FORBIDDEN)
 
@@ -31,6 +42,14 @@ class Authenticate:
         return user
 
     async def __raise_exception(self, msg: str, status_code: int) -> None:
+        """
+        Генерация исключения
+
+        :param msg: str
+        :param status_code: int
+        :return: None
+        """
+
         raise HTTPException(
             status_code=status_code,
             detail=msg,

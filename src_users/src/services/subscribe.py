@@ -6,9 +6,20 @@ from models.user import UserOut
 
 
 class SubscribeService:
+    """
+    Сервис подписки пользователя на исполнителя
+    """
 
     @staticmethod
-    async def save_subscription(user: UserOut, data: SubscribeFormData):
+    async def save_subscription(user: UserOut, data: SubscribeFormData) -> Subscriptions:
+        """
+        Создается/обновляется подписка пользователя на исполнителя
+
+        :param user: UserOut
+        :param data: SubscribeFormData
+        :return: Subscriptions
+        """
+
         subscriptions = []
 
         for artist_id in data.artist_ids:

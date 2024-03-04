@@ -1,9 +1,12 @@
 from typing import Optional
-
 from beanie import Document
 
 
 class User(Document):
+    """
+    Модель пользователя
+    """
+
     email: str
     name: Optional[str] = None
     is_active: Optional[str] = None
@@ -23,13 +26,25 @@ class User(Document):
 
 
 class UserOut(User):
+    """
+    Модель пользователя для отображения
+    """
+
     pass
 
 
 class UserRegister(User):
+    """
+    Модель регистрации нового пользователя
+    """
+
     password: str
     password_repeat: str
 
 
 class UserInDB(User):
+    """
+    Модель пользователя для хранения в БД
+    """
+
     hashed_password: str

@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from fastapi import Security, HTTPException
 from starlette import status
 
@@ -10,6 +9,9 @@ from utils.authenticate import Authenticate
 
 
 class Permission:
+    """
+    Класс проверяет есть ли у пользователя права для просмотра исполнителя
+    """
 
     async def __call__(self, artist_id: int, user: UserOut = Security(Authenticate())) -> bool:
 
