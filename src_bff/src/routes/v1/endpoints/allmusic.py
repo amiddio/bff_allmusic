@@ -27,5 +27,5 @@ async def get_album_detail(album_id: int, _=Security(Permission())) -> dict:
 
 
 @router.post('/parser', response_description="Allmusic artists/albums/tracks parser")
-async def do_parsing(artists: dict) -> None:
+async def do_parsing(artists: dict) -> dict:
     return await AllmusicService().do_parsing(artists=artists)

@@ -8,6 +8,10 @@ from services.user_service import UserService
 
 
 class Permission:
+    """
+    Класс определяет есть ли у текущего пользователя права для просмотра исполнителя
+    """
+
     oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login', scheme_name='JWT')
 
     async def __call__(
