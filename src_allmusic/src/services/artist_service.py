@@ -2,7 +2,6 @@ from fastapi import HTTPException
 from starlette import status
 
 from models.artist import Artist
-from models.release_type import ReleaseType
 from schemas.artist import ArtistShort, ArtistDetail
 from schemas.pagination import PagedResponseSchema, PageParams
 from schemas.release_type import ReleaseTypeDetail
@@ -11,6 +10,9 @@ from services.release_type_service import ReleaseTypeService
 
 
 class ArtistService(BaseService):
+    """
+    Класс бизнес-логики исполнителя
+    """
 
     def __init__(self, db):
         super().__init__(db=db, model=Artist)

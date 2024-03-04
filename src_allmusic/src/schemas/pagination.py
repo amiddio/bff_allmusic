@@ -39,4 +39,3 @@ class PagedResponseSchema(BaseModel):
             }
         }
     }
-

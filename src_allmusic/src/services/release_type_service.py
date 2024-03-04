@@ -4,6 +4,9 @@ from services.base_service import BaseService
 
 
 class ReleaseTypeService(BaseService):
+    """
+    Класс бизнес-логики типов релиза
+    """
 
     def __init__(self, db):
         super().__init__(db=db, model=ReleaseType)

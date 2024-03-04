@@ -4,10 +4,18 @@ from schemas.release_type import ReleaseTypeDetail
 
 
 class ArtistsRequest(BaseModel):
+    """
+    Схема запроса на парсинг исполнителей
+    """
+
     seq: list[str]
 
 
 class ArtistShort(BaseModel):
+    """
+    Схема краткой информации об исполнителе
+    """
+
     id: int = Field(alias='artist_id')
     name: str
 
@@ -22,6 +30,10 @@ class ArtistShort(BaseModel):
 
 
 class ArtistDetail(BaseModel):
+    """
+    Схема подробной информации об исполнителе
+    """
+
     id: int = Field(alias='artist_id')
     name: str
     url: str
@@ -40,5 +52,3 @@ class ArtistDetail(BaseModel):
             }
         }
     }
-
-

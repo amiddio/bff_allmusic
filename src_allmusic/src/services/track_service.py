@@ -7,6 +7,9 @@ from services.base_service import BaseService
 
 
 class TrackService(BaseService):
+    """
+    Класс бизнес-логики трека/песни
+    """
 
     def __init__(self, db):
         super().__init__(db=db, model=Track)

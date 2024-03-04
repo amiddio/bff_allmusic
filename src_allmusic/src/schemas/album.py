@@ -6,6 +6,10 @@ from schemas.track import TrackDetail, Disc
 
 
 class AlbumShort(BaseModel):
+    """
+    Схема кратной информации альбома
+    """
+
     id: int = Field(alias='album_id')
     title: str
     year: str
@@ -22,12 +26,20 @@ class AlbumShort(BaseModel):
 
 
 class Albums(BaseModel):
+    """
+    Схема списка альбомов
+    """
+
     artist: ArtistShort
     release_type: ReleaseTypeDetail
     items: list[AlbumShort] = []
 
 
 class AlbumDetail(BaseModel):
+    """
+    Схема детальной информации об альбоме
+    """
+
     id: int = Field(alias='album_id')
     title: str
     url: str
@@ -61,6 +73,10 @@ class AlbumDetail(BaseModel):
 
 
 class AlbumDisplay(BaseModel):
+    """
+    Схема отображения альбома
+    """
+
     album: AlbumDetail
     artist: ArtistShort
     tracks: list[TrackDetail] | list[Disc]

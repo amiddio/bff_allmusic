@@ -4,6 +4,10 @@ from database.database import Base
 
 
 class ReleaseType(Base):
+    """
+    Модель типа релиза альбома
+    """
+
     __tablename__ = 'release_types'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)

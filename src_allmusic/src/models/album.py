@@ -5,6 +5,10 @@ from database.database import Base
 
 
 class Album(Base):
+    """
+    Модель альбома
+    """
+
     __tablename__ = 'albums'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)

@@ -4,6 +4,10 @@ from database.database import Base
 
 
 class Artist(Base):
+    """
+    Модель исполнителя
+    """
+
     __tablename__ = 'artists'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)

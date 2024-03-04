@@ -2,6 +2,9 @@ from typing import Any
 
 
 class BaseService:
+    """
+    Базовый класс сервисов с общими методами
+    """
 
     def __init__(self, db, model):
         self._db = db

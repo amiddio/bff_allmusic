@@ -2,6 +2,10 @@ from pydantic import BaseModel
 
 
 class TrackDetail(BaseModel):
+    """
+    Схема детальной информации о треке/песне
+    """
+
     num: str
     title: str
     composers: str
@@ -22,6 +26,10 @@ class TrackDetail(BaseModel):
 
 
 class Disc(BaseModel):
+    """
+    Схема отображения диска альбома
+    """
+
     label: str
     items: list[TrackDetail]
 

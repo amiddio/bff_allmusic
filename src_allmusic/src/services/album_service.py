@@ -4,7 +4,6 @@ from starlette import status
 
 from models import Album, Artist
 from models.release_type import ReleaseType
-from models.track import Track
 from schemas.album import Albums, AlbumShort, AlbumDetail, AlbumDisplay
 from schemas.artist import ArtistShort
 from schemas.release_type import ReleaseTypeDetail
@@ -15,6 +14,9 @@ from services.track_service import TrackService
 
 
 class AlbumService(BaseService):
+    """
+    Класс бизнес-логики альбома
+    """
 
     def __init__(self, db):
         super().__init__(db=db, model=Album)

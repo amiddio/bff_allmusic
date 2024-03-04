@@ -5,6 +5,10 @@ from database.database import Base
 
 
 class Track(Base):
+    """
+    Модель трека/песни
+    """
+
     __tablename__ = 'tracks'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
