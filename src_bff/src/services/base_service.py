@@ -37,7 +37,9 @@ class BaseService:
             )
 
     @staticmethod
-    async def post_json(session: ClientSession, url: str, data: dict, headers: Headers = None) -> dict:
+    async def post_json(
+        session: ClientSession, url: str, data: dict, headers: Headers = None, timeout: int = TIMEOUT
+    ) -> dict:
         """
         Выполняется POST запрос
 
@@ -45,14 +47,17 @@ class BaseService:
         :param url: str
         :param data: dict
         :param headers: Headers
+        :param timeout: int
         :return: dict
         """
 
-        async with session.post(url, json=data, timeout=BaseService.TIMEOUT, headers=headers) as response:
+        async with session.post(url, json=data, timeout=timeout, headers=headers) as response:
             return await response.json()
 
     @staticmethod
-    async def post_data(session: ClientSession, url: str, data: dict, headers: Headers = None) -> dict:
+    async def post_data(
+        session: ClientSession, url: str, data: dict, headers: Headers = None, timeout: int = TIMEOUT
+    ) -> dict:
         """
         Выполняется POST запрос
 
@@ -60,8 +65,9 @@ class BaseService:
         :param url: str
         :param data: dict
         :param headers: Headers
+        :param timeout: int
         :return: dict
         """
 
-        async with session.post(url, data=data, timeout=BaseService.TIMEOUT, headers=headers) as response:
+        async with session.post(url, data=data, timeout=timeout, headers=headers) as response:
             return await response.json()

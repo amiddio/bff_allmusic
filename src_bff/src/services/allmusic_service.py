@@ -109,5 +109,6 @@ class AllmusicService(BaseService):
             return await self.post_json(
                 session=session,
                 url=self.APP_ALLMUSIC_DOMAIN + '/parser',
-                data=artists
+                data=artists,
+                timeout=300
             )
